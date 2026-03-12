@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-smf-to-amf
+  namespace: control-plane-services  
+spec:
+  podSelector:
+    matchLabels:
+      component: amf
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          component: smf
+    ports:
+    - protocol: TCP
+      port: 80
+  policyTypes:
+  - Ingress

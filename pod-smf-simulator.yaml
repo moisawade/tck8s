@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2026-03-12T15:34:59Z"
+  labels:
+    component: smf
+  name: smf-simulator
+  namespace: control-plane-services
+  resourceVersion: "2517"
+  uid: c25d790b-51c6-4697-811e-546a98de959a
+spec:
+  containers:
+  - image: curlimages/curl
+    command: ["sleep","3600"]
+    imagePullPolicy: Always
+    name: smf-simulator
+    
