@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: core-cp-default-deny-ingress
+  namespace: core-cp-services
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress: []

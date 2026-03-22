@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nrf-simulator
+  namespace: core-cp-services
+  labels:
+    app: nrf
+spec:
+  containers:
+    - name: nginx
+      image: nginx

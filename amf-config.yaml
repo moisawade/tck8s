@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: amf-config
+  namespace: core-cp-services
+data:
+  amf.conf: |
+    regionId=RegionOne
+    plmnId=00101
+  nrf-uri: "http://nrf.core-cp-services.svc.cluster.local"

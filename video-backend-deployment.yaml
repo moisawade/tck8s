@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-backend-deployment
+  namespace: realtime-services
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: video-backend
+  template:
+    metadata:
+      labels:
+        app: video-backend
+    spec:
+      containers:
+        - name: video-backend-sim
+          image: nginx:1.25
+          ports:
+            - containerPort: 80

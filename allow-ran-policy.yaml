@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ran-to-nrf
+  namespace: core-cp-services
+spec:
+  podSelector:
+    matchLabels:
+      app: nrf
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ran-services
+          podSelector:
+            matchLabels:
+              component: gnodeb
+      ports:
+        - protocol: TCP
+          port: 80

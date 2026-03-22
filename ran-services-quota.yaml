@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ran-services-quota
+  namespace: ran-services  # Remplacez par le nom de votre namespace
+spec:
+  hard:
+    requests.cpu: "2"            # Limite totale de CPU demandée (2 cœurs)
+    requests.memory: "4Gi"       # Limite totale de mémoire demandée (4 Gi)
+    pods: "10"                   # Nombre maximum de Pods

@@ -1,0 +1,24 @@
+# Add Helm repo
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+# Create namespace
+kubectl create namespace monitoring
+
+# Install the stack (ensure Grafana is accessible, e.g., via NodePort)
+helm install prometheus prometheus-community/kube-prometheus-stack \
+  --namespace monitoring \
+  --set grafana.service.type=NodePort \
+  --set grafana.adminPassword='admin' # Example: Set admin password
+
+#Grafana new password Orange221
+
+
+helm upgrade prometheus prometheus-community/kube-prometheus-stack \
+ --namespace monitoring \
+ --set grafana.service.type=NodePort \
+ --set grafana.adminPassword='admin'
+
+
+ helm uninstall prometheus --namespace monitoring
+

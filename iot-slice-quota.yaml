@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: iot-slice
+  labels:
+    slice: iot
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: iot-slice-quota
+  namespace: iot-slice
+spec:
+  hard:
+    requests.cpu: "1"
+    limits.cpu: "2"
+    requests.memory: "1Gi"
+    limits.memory: "2Gi"
+    pods: "10"

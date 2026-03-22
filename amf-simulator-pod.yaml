@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: amf-simulator-pod
+  namespace: core-cp-services
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - name: amf-config-volume
+          mountPath: /etc/amf/amf.conf
+          subPath: amf.conf
+        - name: secrets-volume
+          mountPath: /etc/amf/secrets/db-password
+          subPath: db-password
+        - name: amf-state-volume
+          mountPath: /amf-state
+      env:
+        - name: NRF_URI
+          valueFrom:
+            configMapKeyRef:
+              name: amf-config
+              key: nrf-uri
+        - name: NRF_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: amf-secrets
+              key: nrf-auth-token
+  volumes:
+    - name: amf-config-volume
+      configMap:
+        name: amf-config
+        items:
+          - key: amf.conf
+            path: amf.conf
+    - name: secrets-volume
+      secret:
+        secretName: amf-secrets
+        items:
+          - key: db-password
+            path: db-password
+    - name: amf-state-volume
+      persistentVolumeClaim:
+        claimName: amf-state-pvc

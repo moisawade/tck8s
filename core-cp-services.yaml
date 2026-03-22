@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2026-03-21T17:36:35Z"
+  labels:
+    kubernetes.io/metadata.name: core-cp-services
+  name: core-cp-services
+  resourceVersion: "24443"
+  uid: 69d4c3a0-9e53-4311-ab7d-326013f17c6b
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

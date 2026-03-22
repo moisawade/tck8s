@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: amf-state-pvc
+  namespace: core-cp-services
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # La StorageClass par défaut sera utilisée si aucune spécification n'est fournie
