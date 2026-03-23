@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: iot-data-collector
+  name: iot-edge-processor
   namespace: iot-slice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: iot-collector
+      app: iot-processor
   template:
     metadata:
       labels:
-        app: iot-collector
+        app: iot-processor
     spec:
       containers:
-        - name: iot-collector
+        - name: iot-processor
           image: busybox
           command: ["/bin/sh", "-c"]
           args:
             - |
               while true; do
-                echo "[$(date)] Collected data packet from device group Alpha"
-                sleep 10
+                echo "[$(date)] Processing edge data batch..."
+                sleep 5
               done
           resources:
             requests:

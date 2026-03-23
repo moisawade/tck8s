@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: udm-db-pvc
+  namespace: core-data-services
+spec:
+  storageClassName: telco-ssd # Intentionally wrong/non-existent StorageClass
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi # Request storage size for UDM database

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"name":"core-cp-default-deny-ingress","namespace":"core-cp-services"},"spec":{"ingress":[],"podSelector":{},"policyTypes":["Ingress"]}}
+  creationTimestamp: "2026-03-21T18:03:36Z"
+  generation: 1
+  name: core-cp-default-deny-ingress
+  namespace: core-cp-services
+  resourceVersion: "27307"
+  uid: b7fd2691-9cb8-4f03-bee7-42bfa500af7c
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smf-simulator-deployment
+  namespace: core-nf-troubleshoot # Deploy in our dedicated namespace
+  labels:
+    nf: smf # Telco-specific label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: smf
+  template:
+    metadata:
+      labels:
+        nf: smf
+    spec:
+      containers:
+      - name: smf-sim
+        # Intentionally incorrect image name/tag
+        image: busybox
+        ports:
+        - containerPort: 8080 # Example port for SMF interface
+        command: ["/bin/sh", "-c", "echo SMF Simulator Running...; sleep 3600"]

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-amf-to-nrf
+  namespace: core-cp-services
+spec:
+  podSelector:
+    matchLabels:
+      nf: nrf
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          nf: amf  # Intentionally incorrect label
+    ports:
+    - protocol: TCP
+      port: 80

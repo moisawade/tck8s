@@ -13,3 +13,6 @@ nodes:
   - role: worker
   - role: worker
   - role: worker
+
+
+# https://kind.sigs.k8s.io/docs/user/configuration/#networking

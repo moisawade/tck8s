@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udm-simulator-deployment
+  namespace: core-data-services
+  labels:
+    nf: udm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: udm
+  template:
+    metadata:
+      labels:
+        nf: udm
+        component: smf
+    spec:
+      containers:
+        - name: udm-simulator
+          image: curlimages/curl
+          command: ["sleep", "3600"]
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: udm-pvc
+              mountPath: /data  # ajustez selon votre besoin
+      volumes:
+        - name: udm-pvc
+          persistentVolumeClaim:
+            claimName: udm-db-pvc  # remplacez par le nom réel de votre PVC
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"

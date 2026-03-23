@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smf-simulator-deployment
+  namespace: core-nf-troubleshoot
+  labels:
+    nf: smf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: smf
+  template:
+    metadata:
+      labels:
+        nf: smf
+    spec:
+      containers:
+        - name: smf-sim
+          image: busybox:latest
+          ports:
+            - containerPort: 8080
+          command: ["/bin/sh", "-c", "echo SMF Simulator Running...; sleep 3600"]
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pgrep -f 'sleep 3600'
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pgrep -f 'sleep 3600'
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          # Optionnel : startupProbe (utile pour des NF longs à initialiser)
+          # startupProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - -c
+          #       - pgrep -f 'sleep 3600'
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   failureThreshold: 12
