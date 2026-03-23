@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "video-backend-chart.fullname" . }}
+  labels:
+    {{- include "video-backend-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "video-backend-chart.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "video-backend-chart.fullname" . }}
+    spec:
+      containers:
+        - name: video-backend-sim
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          resources:
+            requests:
+              cpu: "{{ .Values.resources.requests.cpu }}"
+            limits:
+              cpu: "{{ .Values.resources.limits.cpu }}"
